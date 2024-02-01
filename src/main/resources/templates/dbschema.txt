@@ -1,0 +1,40 @@
+Users
+-> id(auto)
+-> Account number(varchar255)
+-> Username(varchar(35)
+-> First name(varchar35
+-> Middle name(varchar35
+-> Last name(varchar35
+-> Age(int)
+-> Location(varchar35
+
+
+UserAccountDetails
+-> id(auto)
+-> Balance
+-> Account number(linked to users)
+
+
+Loan
+-> id(auto)
+-> Account number(linked to users)
+-> Loan amount
+-> Interest rate
+-> total outstanding
+-> total loan paid
+
+
+PaymentHistory
+-> id(auto)
+-> SourceAccountNumber(linked to user)
+-> SourceAccountName(linked to user)//nope
+-> DestAccountNumber(linked to user)
+-> DestAccountName(linked to user)//nope
+-> Amount
+-> isSuccessful?
+-> Message Sent to Source account
+-> Message Sent to Dest account
+
+
+
+"start transaction; update user_account_details set balance = '40000' where account_number= 123456791; update user_account_details set balance = '50000' where account_number= 1234567892; commit; ";
