@@ -4,6 +4,8 @@ import com.example.demo.dtos.AccountDetailsDTO;
 import com.example.demo.services.AccountDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 public class UserAccountDetailsController {
 
@@ -14,7 +16,7 @@ public class UserAccountDetailsController {
     private final AccountDetailsService accountDetailsService;
 
     @GetMapping("/account/info/{account_number}")
-    public String getBalanceByAccountNumber(@PathVariable("account_number") String accountNumber){
+    public BigDecimal getBalanceByAccountNumber(@PathVariable("account_number") String accountNumber){
          return accountDetailsService.showBalance(accountNumber);
     }
 
