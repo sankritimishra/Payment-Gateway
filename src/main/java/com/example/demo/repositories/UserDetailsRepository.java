@@ -47,9 +47,6 @@ public class UserDetailsRepository {
         mp.put("accountNo", accountNumber);
 //        namedParameterJdbcTemplate.getJdbcTemplate().update(sql);
         namedParameterJdbcTemplate.update(sql,mp);
-
-
-
     }
 
     public void updateUser(String accountNumber, FullUserInfoDTO body) {

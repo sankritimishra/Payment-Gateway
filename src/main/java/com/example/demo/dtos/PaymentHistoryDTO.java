@@ -1,27 +1,20 @@
 package com.example.demo.dtos;
 
+import java.math.BigDecimal;
+
 public class PaymentHistoryDTO {
+
     private String sourceAccountNumber;
     private String sourceAccountName;
     private String destAccountNumber;
     private String destAccountName;
-    private double amount;
-
-    public PaymentHistoryDTO(String sourceAccountNumber, String sourceAccountName, String destAccountNumber, String destAccountName, double amount, boolean isSuccessful, String messageSentToSourceAccount, String messageSentToDestAccount) {
-        this.sourceAccountNumber = sourceAccountNumber;
-        this.sourceAccountName = sourceAccountName;
-        this.destAccountNumber = destAccountNumber;
-        this.destAccountName = destAccountName;
-        this.amount = amount;
-        this.isSuccessful = isSuccessful;
-        this.messageSentToSourceAccount = messageSentToSourceAccount;
-        this.messageSentToDestAccount = messageSentToDestAccount;
-    }
-
-    private boolean isSuccessful;
-
+    private BigDecimal amount;
+    private boolean successful;
     private String messageSentToSourceAccount;
     private String messageSentToDestAccount;
+
+    public PaymentHistoryDTO() {
+    }
 
     public String getSourceAccountNumber() {
         return sourceAccountNumber;
@@ -55,20 +48,20 @@ public class PaymentHistoryDTO {
         this.destAccountName = destAccountName;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
     public boolean isSuccessful() {
-        return isSuccessful;
+        return successful;
     }
 
     public void setSuccessful(boolean successful) {
-        isSuccessful = successful;
+        this.successful = successful;
     }
 
     public String getMessageSentToSourceAccount() {

@@ -4,6 +4,8 @@ import com.example.demo.dtos.AccountDetailsDTO;
 import com.example.demo.repositories.AccountDetailsRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class AccountDetailsService {
 
@@ -12,7 +14,7 @@ public class AccountDetailsService {
     }
 
     private final AccountDetailsRepository accountDetailsRepository;
-    public String showBalance(String accountNumber) {
+    public BigDecimal showBalance(String accountNumber) {
            return accountDetailsRepository.getAccountBalance(accountNumber);
     }
 
