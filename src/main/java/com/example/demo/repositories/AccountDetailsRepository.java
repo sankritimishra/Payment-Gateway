@@ -56,6 +56,7 @@ public class AccountDetailsRepository {
         return result.isEmpty() ? null : result.get(0);
     }
 
+
     public boolean accountExists(String accountNumber) {
         String sql = "SELECT COUNT(*) FROM user_account_details WHERE account_number = :accountNumber";
 
