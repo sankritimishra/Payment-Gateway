@@ -118,8 +118,18 @@ public class PaymentHistoryRepository {
             throw new IllegalArgumentException("Transaction amount must be positive");
         }
 
-        BigDecimal sourceBalance = accountDetailsRepository.getAccountBalance(sourceAccountNumber);
-        BigDecimal destBalance = accountDetailsRepository.getAccountBalance(destAccountNumber);
+        // Lock both account rows before reading their balances. Locking in a fixed order
+        // (lower account number first) prevents two concurrent transfers between the same
+        // pair of accounts in opposite directions from deadlocking on each other's locks.
+        BigDecimal sourceBalance;
+        BigDecimal destBalance;
+        if (sourceAccountNumber.compareTo(destAccountNumber) < 0) {
+            sourceBalance = accountDetailsRepository.getAccountBalanceForUpdate(sourceAccountNumber);
+            destBalance = accountDetailsRepository.getAccountBalanceForUpdate(destAccountNumber);
+        } else {
+            destBalance = accountDetailsRepository.getAccountBalanceForUpdate(destAccountNumber);
+            sourceBalance = accountDetailsRepository.getAccountBalanceForUpdate(sourceAccountNumber);
+        }
 
         if (sourceBalance == null || destBalance == null) {
             throw new IllegalArgumentException("Invalid source or destination account number");
