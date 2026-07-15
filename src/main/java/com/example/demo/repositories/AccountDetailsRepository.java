@@ -35,6 +35,28 @@ public class AccountDetailsRepository {
         return result.isEmpty() ? null : result.get(0);
     }
 
+    /**
+     * Same as getAccountBalance but takes an exclusive row lock (SELECT ... FOR UPDATE).
+     * Must be called within a transaction. Blocks any other transaction from reading-for-update
+     * or writing this row until the current transaction commits/rolls back, closing the
+     * read-then-write race that a plain SELECT followed by UPDATE would allow.
+     */
+    public BigDecimal getAccountBalanceForUpdate(String accountNumber) {
+        String sql = "SELECT balance FROM user_account_details WHERE account_number = :accountNumber FOR UPDATE";
+
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("accountNumber", accountNumber);
+
+        List<BigDecimal> result = namedParameterJdbcTemplate.query(
+                sql,
+                params,
+                (rs, rowNum) -> rs.getBigDecimal("balance")
+        );
+
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+
     public boolean accountExists(String accountNumber) {
         String sql = "SELECT COUNT(*) FROM user_account_details WHERE account_number = :accountNumber";
 
