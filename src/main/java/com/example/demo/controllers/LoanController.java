@@ -1,11 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dtos.LoanDTO;
-import com.example.demo.dtos.UpdateLoanDTO;
 import com.example.demo.services.LoanService;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.ParseException;
 
 @RestController
 public class LoanController {
@@ -21,13 +18,13 @@ public class LoanController {
            return loanService.userLoanDetails(accountNumber);
        }
 
-       @PostMapping("add/loan/details/{account_number}")
-       public void addLoanDetailsByAccountNumber(@PathVariable String accountNumber, @RequestBody LoanDTO body) throws ParseException {
+       @PostMapping("/add/loan/details/{account_number}")
+       public void addLoanDetailsByAccountNumber(@PathVariable String accountNumber, @RequestBody LoanDTO body) {
            loanService.addUserLoanDetails(accountNumber, body);
        }
 
        @PostMapping("/update/loan/details/{account_number}")
-       public void updateLoanDetailsByAccountNumber(@PathVariable("account_number") String accountNumber) throws ParseException {
+       public void updateLoanDetailsByAccountNumber(@PathVariable("account_number") String accountNumber) {
           // LoanDTO body = getLoanDetailsByAccountNumber(accountNumber);
            //System.out.println(paymentMade.getTotalLoanPaid());
           loanService.updateUserLoanDetails(accountNumber);

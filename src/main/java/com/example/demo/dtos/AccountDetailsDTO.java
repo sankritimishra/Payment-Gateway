@@ -1,17 +1,21 @@
 package com.example.demo.dtos;
 
+import java.math.BigDecimal;
+
 public class AccountDetailsDTO {
 
-    private String balance;
+    private BigDecimal balance;
 
     private String accountNumber;
 
+    public AccountDetailsDTO() {
+    }
 
-    public String getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -23,7 +27,7 @@ public class AccountDetailsDTO {
         this.accountNumber = accountNumber;
     }
 
-    public AccountDetailsDTO(String balance, String accountNumber) {
+    public AccountDetailsDTO(BigDecimal balance, String accountNumber) {
         this.balance = balance;
         this.accountNumber = accountNumber;
     }

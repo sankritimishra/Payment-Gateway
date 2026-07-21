@@ -6,9 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class AccountDetailsRepository {
@@ -68,22 +66,23 @@ public class AccountDetailsRepository {
     }
 
     public void updateAccountBalance(String accountNumber, AccountDetailsDTO body) {
-        String sql = "update user_account_details set balance = :balance where account_number= :accountNumber;";
-        Map<String, String> mp = new HashMap<>();
-        mp.put("balance",body.getBalance());
-        mp.put("accountNumber", accountNumber);
+        String sql = "UPDATE user_account_details SET balance = :balance WHERE account_number = :accountNumber";
 
-        namedParameterJdbcTemplate.update(sql,mp);
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("balance", body.getBalance())
+                .addValue("accountNumber", accountNumber);
+
+        namedParameterJdbcTemplate.update(sql, params);
     }
 
 
     public void addDetailsByAccountNumber(String accountNumber, AccountDetailsDTO body) {
-        String sql = "insert into user_account_details(balance,account_number) values(:balance, :accountNumber);";
+        String sql = "INSERT INTO user_account_details (balance, account_number) VALUES (:balance, :accountNumber)";
 
-        Map<String,Object>mp = new HashMap<>();
-        mp.put("balance", body.getBalance());
-        mp.put("accountNumber", body.getAccountNumber());
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("balance", body.getBalance())
+                .addValue("accountNumber", body.getAccountNumber());
 
-        namedParameterJdbcTemplate.update(sql,mp);
+        namedParameterJdbcTemplate.update(sql, params);
     }
 }
