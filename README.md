@@ -97,8 +97,6 @@ or just export `DB_USERNAME`/`DB_PASSWORD` directly.
 ./mvnw spring-boot:run
 ```
 
-The API is available on `http://localhost:8080`.
-
 ### Running tests
 
 ```bash
